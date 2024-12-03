@@ -6,7 +6,7 @@
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:27:05 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/03 18:54:51 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/03 19:21:08 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,32 @@ static	void	bonus_part(const char *format, int *i, va_list list, int *count)
 	*i += 2;
 }
 
+void	handle_format(const char *format, int *i, va_list list, int *count)
+{
+	if (ft_strchr("cspdiuxX%", format[*i + 1]))
+	{
+		ft_handlers(format, i, list, count);
+		(*i)++;
+	}
+	else
+		bonus_part(format, i, list, count);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	list;
 	int		i;
 	int		count;
 
+	if (write(1, "", 0) == -1)
+		return (-1);
 	va_start(list, format);
 	i = 0;
 	count = 0;
-	if (write(1, "", 0) == -1)
-		return (-1);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-		{
-			if (ft_strchr("cspdiuxX%", format[i + 1]))
-			{
-				ft_handlers(format, &i, list, &count);
-				i++;
-			}
-			else
-				bonus_part(format, &i, list, &count);
-		}
+			handle_format(format, &i, list, &count);
 		else
 			count += write(1, &format[i], 1);
 		i++;
