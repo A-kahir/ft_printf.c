@@ -6,7 +6,7 @@
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:27:05 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/01 17:54:16 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/03 18:54:51 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	ft_printf(const char *format, ...)
 	va_start(list, format);
 	i = 0;
 	count = 0;
+	if (write(1, "", 0) == -1)
+		return (-1);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
