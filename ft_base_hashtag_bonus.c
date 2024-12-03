@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base_hashtag_bonus.c                               :+:      :+:    :+:   */
+/*   ft_base_hashtag_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:42:21 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/01 17:35:59 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/03 20:01:25 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,17 @@ static	void	base_hexa(const char *format, unsigned long value, int *count)
 
 void	base_hashtag(long long value, const char *format, int *count)
 {
-	if (*format == 'x')
+	if (value == 0)
+	{
+		*count += write(1, "0", 1);
+		return ;
+	}
+	if (*format == 'x' && value != 0)
 	{
 		*count += write(1, "0x", 2);
 		base_hexa(format, (unsigned long)value, count);
 	}
-	else if (*format == 'X')
+	else if (*format == 'X' && value != 0)
 	{
 		*count += write(1, "0X", 2);
 		base_hexa(format, (unsigned long)value, count);

@@ -6,7 +6,7 @@
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:27:05 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/03 19:21:08 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/03 19:31:31 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 static	void	bonus_part(const char *format, int *i, va_list list, int *count)
 {
-	if (format[*i + 1] == '#' || format[*i + 1] == ' ' || format[*i + 1] == '+')
+	while (format[*i + 1] == '#' || format[*i + 1] == ' '
+		|| format[*i + 1] == '+')
 	{
-		if (format[*i + 1] == '#')
-		{
-			hashtag(format, i, list, count);
-		}
-		else if (format[*i + 1] == ' ')
-		{
-			space(format, i, list, count);
-		}
-		else if (format[*i + 1] == '+')
-		{
-			plus(format, i, list, count);
-		}
+		(*i)++;
 	}
-	*i += 2;
+	if (ft_strchr("cspdiuxX%", format[*i + 1]))
+	{
+		if (format[*i] == '#')
+			hashtag(format, i, list, count);
+		else if (format[*i] == ' ')
+			space(format, i, list, count);
+		else if (format[*i] == '+')
+			plus(format, i, list, count);
+	}
+	(*i)++;
 }
 
 void	handle_format(const char *format, int *i, va_list list, int *count)
