@@ -21,7 +21,7 @@ By working on this project, I enhanced my understanding of:
   - `%d`/`%i` : Signed decimal integers.
   - `%u` : Unsigned decimal integers.
   - `%x`/`%X` : Hexadecimal (lowercase/uppercase).
-- Handles width, precision, and flags (`-`, `0`, `.`).
+- Handles also (`#`, ` `, `+`).
 - Compatible with various edge cases for robust performance.
 
 ---
