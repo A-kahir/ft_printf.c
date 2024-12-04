@@ -6,7 +6,7 @@
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:27:05 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/03 19:31:31 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/04 11:37:59 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ static	void	bonus_part(const char *format, int *i, va_list list, int *count)
 	while (format[*i + 1] == '#' || format[*i + 1] == ' '
 		|| format[*i + 1] == '+')
 	{
+		(*i)++;
+	}
+	while (format[*i + 1] >= '0' && format[*i + 1] <= '9')
+	{
+		if (format[*i + 1] >= '0' && format[*i + 1] <= '9')
+			*count += write(1, " ", 1);
 		(*i)++;
 	}
 	if (ft_strchr("cspdiuxX%", format[*i + 1]))
@@ -58,7 +64,9 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 			handle_format(format, &i, list, &count);
 		else
+		{
 			count += write(1, &format[i], 1);
+		}
 		i++;
 	}
 	va_end(list);

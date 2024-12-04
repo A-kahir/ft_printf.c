@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base_space_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_base_space_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:07:51 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/01 17:36:21 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/04 11:27:49 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,10 @@ static	void	base_decimal(int value, int *count)
 
 void	base_space(long long value, const char *format, int *count)
 {
+	if (value >= 0)
+		*count += write(1, " ", 1);
 	if (*format == 'd')
-	{
-		*count += write(1, " ", 1);
 		base_decimal((int)value, count);
-	}
 	else if (*format == 'i')
-	{
-		*count += write(1, " ", 1);
 		base_decimal((int)value, count);
-	}
 }

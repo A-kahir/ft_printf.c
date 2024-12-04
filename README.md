@@ -31,6 +31,6 @@ By working on this project, I enhanced my understanding of:
 To use **ft_printf**, clone the repository and compile the project using the provided `Makefile`:
 
 ```bash
-git clone https://github.com/akahir/ft_printf.git
+git clone https://github.com/A-kahir/ft_printf.git
 cd ft_printf
 make

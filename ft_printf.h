@@ -6,7 +6,7 @@
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:21:32 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/03 20:02:18 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/04 11:47:39 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdlib.h>
 //principle func : 
 int		ft_printf(const char *format, ...);
 void	ft_handlers(const char *format, int *i, va_list list, int *count);
