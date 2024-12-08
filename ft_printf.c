@@ -6,29 +6,49 @@
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:27:05 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/08 16:26:34 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/08 17:32:31 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	void	bonus_part(const char *format, int *i, va_list list, int *count)
+void	ft(char format, int *hashtag_flag, int *plus_flag, int *space_flag)
 {
+	if (format == '#')
+		*hashtag_flag = 1;
+	if (format == '+')
+		*plus_flag = 1;
+	if (format == ' ')
+		*space_flag = 1;
+}
+
+static void	bonus_part(const char *format, int *i, va_list list, int *count)
+{
+	int	hashtag_flag;
+	int	plus_flag;
+	int	space_flag;
+
+	hashtag_flag = 0;
+	plus_flag = 0;
+	space_flag = 0;
 	while (format[*i + 1] == '#' || format[*i + 1] == ' '
 		|| format[*i + 1] == '+')
 	{
+		ft(format[*i + 1], &hashtag_flag, &plus_flag, &space_flag);
 		(*i)++;
 	}
+	while (format[*i + 1] == ' ')
+		(*i)++;
 	if (ft_strchr("cspdiuxX%", format[*i + 1]))
 	{
-		if (format[*i] == '#')
+		(*i)++;
+		if (hashtag_flag)
 			hashtag(format, i, list, count);
-		else if (format[*i] == ' ')
-			space(format, i, list, count);
-		else if (format[*i] == '+')
+		if (plus_flag)
 			plus(format, i, list, count);
+		if (space_flag)
+			space(format, i, list, count);
 	}
-	(*i)++;
 }
 
 void	handle_format(const char *format, int *i, va_list list, int *count)

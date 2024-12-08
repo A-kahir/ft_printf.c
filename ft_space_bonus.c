@@ -1,48 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   space_bonus.c                                      :+:      :+:    :+:   */
+/*   ft_space_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akahir <akahir@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:00:13 by akahir            #+#    #+#             */
-/*   Updated: 2024/12/01 17:37:32 by akahir           ###   ########.fr       */
+/*   Updated: 2024/12/08 19:09:28 by akahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static	char	type(const char *format, int *i)
-{
-	int	j;
-
-	j = *i;
-	while (format[*i] == ' ')
-	{
-		if (ft_strchr("cspdiuxX%", format[j]))
-		{
-			return (format[j]);
-		}
-		j++;
-	}
-	return (0);
-}
-
+#include <stdio.h>
 void	space(const char *format, int *i, va_list list, int *count)
 {
-	char	j;
+	char *str;
 	int		nb;
 
-	j = type(format, i);
-	if (j == 'c' || j == 's' || j == 'p' || j == 'u'
-		|| j == 'x' || j == 'X' || j == '%')
+	if (format[*i] == 'c' || format[*i] == 'p' || format[*i] == 'u'
+		|| format[*i] == 'x' || format[*i] == 'X' || format[*i] == '%')
 		ft_handlers(format, i, list, count);
-	if (j == 'd' && format[*i] == ' ')
+	if (format[*i] == 's')
+	{
+		str = va_arg(list, char *);
+		if (str == NULL)
+		{
+			*count += write(1, "(null)", 6);
+			return ;
+		}
+		*count += write(1, str, ft_strlen(str));
+	}
+	if (format[*i] == 'd')
 	{
 		nb = va_arg(list, int);
 		base_space(nb, (char *)"d", count);
 	}
-	else if (j == 'i' && format[*i] == ' ')
+	else if (format[*i] == 'i')
 	{
 		nb = va_arg(list, int);
 		base_space(nb, (char *)"i", count);
